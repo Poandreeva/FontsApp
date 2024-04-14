@@ -8,14 +8,17 @@
 ## Установка и запуск
 ### Сборка Docker образа
 Перейдите в каталог с файлом Dockerfile и выполните следующую команду для сборки Docker образа:
+
 docker build -t fontsapp .
 
 ### Запуск приложения
 Для запуска приложения используйте следующую команду, указав путь к модели и изображению в вашей файловой системе:
+
 docker run -it --rm fontsapp /path/to/model /path/to/image.png
 
 ### Примеры использования
-Предположим, у вас есть модель в директории /models/font_model.keras и изображение в /images/sample.png. Запуск приложения будет выглядеть так:
+Предположим, у вас есть модель в директории /models/font_model.keras и изображение в /images/sample.png:
+
 docker run -it --rm fontsapp /models/font_model.keras /images/sample.png
 
 ## Функциональность
