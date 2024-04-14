@@ -14,7 +14,7 @@ docker build -t fontsapp .
 ### Запуск приложения
 Для запуска приложения используйте следующую команду, указав путь к папке с моделью и изображению в вашей файловой системе:
 
-docker run -it --rm fontsapp /path/to/model /path/to/image.png
+docker run -it --rm fontsapp /path/to/model_directory /path/to/image.png
 
 #### Пример: 
 
