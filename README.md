@@ -10,8 +10,8 @@
 - Dockerfile: Файл для сборки Docker-образа.
 - FontsTest.py: Основной скрипт Python, выполняющий распознавание шрифтов.
 - font_recognition_model.keras: Обученная модель для распознавания шрифтов.
-- label_encoder.pkl: Файл с сериализованным объектом LabelEncoder.
-- requirements.txt: Список зависимостей Python, необходимых для работы приложения.
+- label_encoder.pkl: Файл с объектом LabelEncoder.
+- requirements.txt: Список библиотек Python, необходимых для работы приложения.
 
 ## Установка и запуск
 1. Клонируйте репозиторий на свой локальный компьютер:
