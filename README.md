@@ -25,4 +25,4 @@ docker build -t fontsapp .
 
 4. Запустите контейнер из образа (замените /path/to/image.png на путь к изображению, на котором необходимо распознать шрифт):
 docker run -it --rm fontsapp /app /path/to/image.png
-
+* Пример: docker run -it --rm fontsapp /app /app/dataset/AlumniSansCollegiateOne-Regular/AlumniSansCollegiateOne-Regular_190.png
