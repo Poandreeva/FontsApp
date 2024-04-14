@@ -36,7 +36,7 @@ cd <имя_директории>
 3. Соберите Docker-образ:
 docker build -t fontsapp .
 
-4. Запустите контейнер из образа:
+4. Запустите контейнер из образа и передайте в него путь к изображению с текстом формате png:
 
 docker run -it --rm \
   -v /home/user/your_image.png:/app/images/your_image.png \
