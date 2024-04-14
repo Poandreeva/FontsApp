@@ -44,9 +44,9 @@ docker run -it --rm \
   -v /home/user/your_image.png:/app/images/your_image.png \
   fontsapp /app /app/images/your_image.png
 
-замените '/home/user/your_image.png' на путь к изображению, на котором необходимо распознать шрифт 
+   * замените '/home/user/your_image.png' на путь к изображению, на котором необходимо распознать шрифт 
 
-замените 'your_image.png' на имя изображения
+   * замените 'your_image.png' на имя изображения
 
 * Пример:
   docker run -it --rm \
