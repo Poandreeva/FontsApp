@@ -1,4 +1,4 @@
-# Официальный образ Python
+# Образ Python
 FROM python:3.11-slim
 
 # Установка необходимых системных библиотек
@@ -22,7 +22,4 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Запуск скрипта по умолчанию при старте контейнера
-ENTRYPOINT ["python", "FontsTest.py"]
-
-# Передача аргументов в скрипт через командную строку Docker
-CMD ["model_path", "image_path"]
+ENTRYPOINT ["python", "3_ModuleRecognition.py"]
