@@ -12,14 +12,14 @@
 docker build -t fontsapp .
 
 ### Запуск приложения
-Для запуска приложения используйте следующую команду, указав путь к модели и изображению в вашей файловой системе:
+Для запуска приложения используйте следующую команду, указав путь к папке с моделью и изображению в вашей файловой системе:
 
 docker run -it --rm fontsapp /path/to/model /path/to/image.png
 
-### Примеры использования
-Предположим, у вас есть модель в директории /models/font_model.keras и изображение в /images/sample.png:
+#### Пример: 
 
-docker run -it --rm fontsapp /models/font_model.keras /images/sample.png
+docker run -it --rm fontsapp /app /app/dataset/AlumniSansCollegiateOne-Regular/AlumniSansCollegiateOne-Regular_190.png
+
 
 ## Функциональность
 Автоматическое определение контуров текста на изображении.
