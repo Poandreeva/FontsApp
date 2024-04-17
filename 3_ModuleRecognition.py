@@ -13,55 +13,60 @@ import pickle
 
 def find_contours(char_image):
     '''
-    Поиск контуров в изображении для выделения отдельных символов.
-    
+    Извлекает контуры символов из изображения.
+
     Args:
-    char_image (Image): Изображение, из которого необходимо извлечь контуры.
-    
+        char_image (Image): Изображение, из которого извлекаются контуры.
+
     Returns:
-    list: Список прямоугольников, описывающих найденные контуры.
+        list: Список прямоугольников, описывающих границы каждого найденного контура.
     '''
+    # Конвертация изображения в массив numpy для обработки
     im_array = np.array(char_image)
     if len(im_array.shape) == 3:
-        im_gray = cv2.cvtColor(im_array, cv2.COLOR_RGB2GRAY)
+        im_gray = cv2.cvtColor(im_array, cv2.COLOR_RGB2GRAY)  # Перевод в градации серого
     else:
         im_gray = im_array
 
+    # Применение адаптивного порога для улучшения видимости контуров
     im_th = cv2.adaptiveThreshold(im_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
                                   cv2.THRESH_BINARY_INV, 11, 2)
+    # Поиск контуров
     ctrs, _ = cv2.findContours(im_th, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    # Получение ограничивающих прямоугольников для каждого контура
     contours = [cv2.boundingRect(ctr) for ctr in ctrs]
     return contours
 
 def extract_symbols(char_image, contours):
     '''
-    Выделение символов из строки по найденным контурам.
-    
+    Выделяет и масштабирует символы на основе найденных контуров.
+
     Args:
-    char_image (Image): Изображение строки.
-    contours (list): Список контуров символов.
-    
+        char_image (Image): Исходное изображение, содержащее символы.
+        contours (list): Координаты контуров для вырезания символов.
+
     Returns:
-    list: Список изображений выделенных символов.
+        list: Список изображений символов, преобразованных к стандартному размеру.
     '''
     symbols = []
     for (x, y, w, h) in contours:
+        # Обрезка по контуру и масштабирование до размера 28x28
         symbol = char_image.crop((x, y, x + w, y + h))
         symbol = symbol.resize((28, 28))
         symbols.append(np.array(symbol))
     return symbols
 
-
 def prepare_images(symbols):
     '''
-    Подготовка изображений символов для модели.
-    
+    Нормализует изображения символов для подачи в нейронную сеть.
+
     Args:
-    symbols (list): Список изображений выделенных символов, которые необходимо .
-    
+        symbols (list): Список изображений символов.
+
     Returns:
-    numpy.ndarray: Массив numpy изображений размером 28x28 пикселей в диапазоне от 0 до 1 с добавлением дополнительного измерения для канала.
+        numpy.ndarray: Подготовленный массив изображений для модели.
     '''
+    # Нормализация и добавление канала для совместимости с архитектурой модели
     processed_images = np.array([np.resize(symbol, (28, 28)) for symbol in symbols])
     processed_images = processed_images / 255.0
     processed_images = processed_images.reshape((len(processed_images), 28, 28, 1))
@@ -69,31 +74,27 @@ def prepare_images(symbols):
 
 def main(assets_dir, image_path):
     '''
-    Загрузка модели и предсказание типа шрифта на изображении.
-    
-    Args:
-        assets_dir (str): Директория с моделью и другими ресурсами.
-        image_path (str): Путь к файлу изображения для распознавания шрифта.
-    
-    Шаги:
-        - Загружает обученную модель и кодировщик меток из указанной директории.
-        - Открывает указанное изображение, преобразует его в оттенки серого и находит контуры.
-        - Извлекает символы из контуров и предварительно обрабатывает их.
-        - Совершает предсказания на этих предварительно обработанных изображениях с помощью загруженной модели.
-        - Агрегирует предсказания для определения наиболее вероятного шрифта и его средней вероятности предсказания.
-    '''
+    Основная функция для загрузки модели, обработки изображения и вывода предсказаний.
 
+    Args:
+        assets_dir (str): Путь к ресурсам (модель и кодировщик меток).
+        image_path (str): Путь к изображению для обработки.
+    '''
+    # Загрузка модели и кодировщика меток
     model = load_model(f"{assets_dir}/font_recognition_model.keras")
     with open(f"{assets_dir}/label_encoder.pkl", 'rb') as file:
         label_encoder = pickle.load(file)
     
+    # Обработка изображения
     char_image = Image.open(image_path).convert('L')
     contours = find_contours(char_image)
     symbols = extract_symbols(char_image, contours)
+    
+    # Подготовка изображений и выполнение предсказаний
     processed_images = prepare_images(symbols)
-
     predictions = model.predict(processed_images)
     
+    # Агрегация предсказаний для определения наиболее вероятного шрифта
     font_count = {}
     total_probability = 0
     for prediction in predictions:
@@ -111,7 +112,7 @@ def main(assets_dir, image_path):
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
-        print("Usage: python FontsTest.py <assets_directory> <image_path>")
+        print("Usage: fontsapp /app /app/images/your_image.png")
         sys.exit(1)
     assets_dir = sys.argv[1]
     image_path = sys.argv[2]
