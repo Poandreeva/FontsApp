@@ -1,0 +1,63 @@
+(base) PolinaMac@MacBook-Pro-Polina FontsApp % docker build -t fontsapp .
+  
+[+] Building 560.0s (12/12) FINISHED                       docker:desktop-linux
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 1.03kB                                     0.0s
+ => [internal] load metadata for docker.io/library/python:3.11-slim        2.7s
+ => [auth] library/python:pull token for registry-1.docker.io              0.0s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [1/6] FROM docker.io/library/python:3.11-slim@sha256:dad770592ab3582a  0.0s
+ => [internal] load build context                                          2.0s
+ => => transferring context: 4.59MB                                        1.7s
+ => CACHED [2/6] RUN apt-get update && apt-get install -y     libglib2.0-  0.0s
+ => CACHED [3/6] WORKDIR /app                                              0.0s
+ => [4/6] COPY . /app                                                      5.6s
+ => [5/6] COPY requirements.txt /app/                                      0.0s
+ => [6/6] RUN pip install --no-cache-dir -r requirements.txt             542.7s
+ => exporting to image                                                     7.2s 
+ => => exporting layers                                                    7.2s 
+ => => writing image sha256:ae0740a383d5e46c7052e556b6e5d61916b57d2d2519f  0.0s 
+ => => naming to docker.io/library/fontsapp                                0.0s 
+                                                                                
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/rx83wf99ae5mlotespvqxxwes
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview
+(base) PolinaMac@MacBook-Pro-Polina FontsApp % docker run -it --rm \     
+  -v /Users/PolinaMac/Desktop:/app/images \
+  fontsapp /app /app/images/GhastlyPanicCyr_97.png
+/usr/local/lib/python3.11/site-packages/sklearn/base.py:376: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.4.0 when using version 1.4.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 71ms/step
+Средняя вероятность по символам: 0.9134
+Наиболее вероятный шрифт: GhastlyPanicCyr
+(base) PolinaMac@MacBook-Pro-Polina FontsApp % docker run -it --rm \
+  -v /Users/PolinaMac/Desktop:/app/images \
+  fontsapp /app /app/images/Realest-Extended_95.png
+/usr/local/lib/python3.11/site-packages/sklearn/base.py:376: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.4.0 when using version 1.4.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 27ms/step
+Средняя вероятность по символам: 1.0000
+Наиболее вероятный шрифт: Realest-Extended
+(base) PolinaMac@MacBook-Pro-Polina FontsApp % docker run -it --rm \
+  -v /Users/PolinaMac/Desktop:/app/images \
+  fontsapp /app /app/images/AlumniSansCollegiateOne-Regular_72.png
+/usr/local/lib/python3.11/site-packages/sklearn/base.py:376: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.4.0 when using version 1.4.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 88ms/step
+Средняя вероятность по символам: 0.7474
+Наиболее вероятный шрифт: AlumniSansCollegiateOne-Regular
+(base) PolinaMac@MacBook-Pro-Polina FontsApp % docker run -it --rm \
+  -v /Users/PolinaMac/Desktop:/app/images \
+  fontsapp /app /app/images/ambidexter_regular_98.png            
+/usr/local/lib/python3.11/site-packages/sklearn/base.py:376: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.4.0 when using version 1.4.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 26ms/step
+Средняя вероятность по символам: 0.8624
+Наиболее вероятный шрифт: ambidexter_regular
+(base) PolinaMac@MacBook-Pro-Polina FontsApp % 
