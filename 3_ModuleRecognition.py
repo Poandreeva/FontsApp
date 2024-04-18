@@ -5,11 +5,10 @@
 
 
 import sys
+import cv2
 import numpy as np
 from PIL import Image
-import cv2
 from tensorflow.keras.models import load_model
-import pickle
 
 
 'Поиск контура символа'
