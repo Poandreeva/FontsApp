@@ -6,6 +6,7 @@
 
 import sys
 import cv2
+import pickle
 import numpy as np
 from PIL import Image
 from tensorflow.keras.models import load_model
